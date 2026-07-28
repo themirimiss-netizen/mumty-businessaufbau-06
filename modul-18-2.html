@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Content-Vorlauf · Launch · MUMTY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fdf6f3; --card: #ffffff; --ink: #3a2f30; --ink-soft: #7a6b6c;
+  --blush: #f3d9d6; --blush-deep: #e3a9a8; --rose: #c97b86; --rose-deep: #a85b68;
+  --gold: #d4a24a; --gold-deep: #9c7328; --gold-pale: #faf1de; --line: #eee0d8;
+  --sage: #7da398; --sage-deep: #5e8478; --apricot: #e97d69; --copper: #9f634e;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: 'Lato', sans-serif; line-height: 1.6; }
+.wrap { max-width: 720px; margin: 0 auto; padding: 40px 24px 96px; }
+.brand-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+.brand-left { display: flex; align-items: center; gap: 14px; }
+.brand-row video { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+.brand-name { font-family: 'Fraunces', serif; font-size: 15px; letter-spacing: .15em; color: var(--copper); text-transform: uppercase; border-bottom: 1px solid var(--sage); padding-bottom: 2px; }
+.back-link { font-size: 13px; color: var(--ink-soft); text-decoration: none; border: 0.5px solid var(--line); padding: 6px 14px; border-radius: 20px; }
+.back-link:hover { border-color: var(--rose); color: var(--rose-deep); }
+.hero { display: flex; align-items: center; gap: 20px; margin-bottom: 8px; }
+.avatar { width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, var(--apricot), var(--rose)); flex-shrink: 0; overflow: hidden; }
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+.eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--rose-deep); margin: 0 0 4px; }
+h1 { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 600; line-height: 1.15; margin: 0; color: var(--ink); }
+.intro { font-size: 16px; color: var(--ink-soft); max-width: 56ch; margin: 20px 0 32px; }
+.progress-track { height: 6px; background: var(--blush); border-radius: 4px; overflow: hidden; margin-bottom: 8px; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--rose), var(--gold)); background-size: 200% 100%; animation: shimmer 3s ease-in-out infinite; width: 0%; transition: width .4s ease; }
+@keyframes shimmer { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+.progress-label { font-size: 13px; color: var(--ink-soft); margin-bottom: 36px; }
+.card { background: var(--card); border: 0.5px solid var(--line); border-radius: 16px; padding: 24px 26px; box-shadow: 0 1px 0 rgba(255,255,255,.6) inset, 0 6px 16px rgba(169,91,104,.07); }
+.card p { font-size: 15px; color: var(--ink-soft); margin: 0 0 14px; }
+.reflect { background: var(--blush); border-radius: 12px; padding: 14px 16px; margin: 14px 0; }
+.reflect-q { font-size: 14px; font-weight: 700; color: var(--rose-deep); margin: 0 0 8px; display: block; }
+.reflect textarea { width: 100%; min-height: 64px; border: 0.5px solid var(--line); border-radius: 10px; padding: 10px 12px; font-family: 'Lato', sans-serif; font-size: 14px; color: var(--ink); background: var(--card); resize: vertical; }
+.reflect textarea:focus { outline: none; border-color: var(--rose); box-shadow: 0 0 0 2px rgba(201,123,134,.15); }
+.example { border-left: 2px solid var(--apricot); margin: 12px 0; font-size: 13.5px; color: var(--ink-soft); background: var(--gold-pale); padding: 10px 12px 10px 14px; border-radius: 0 10px 10px 0; }
+.example strong { color: var(--copper); font-weight: 700; }
+.checklist { display: flex; flex-direction: column; gap: 10px; margin: 16px 0; }
+.checklist label { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--ink); cursor: pointer; }
+.checklist input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--sage-deep); cursor: pointer; }
+.mark-done, .submit-btn, .nav-btn { position: relative; display: inline-flex; align-items: center; gap: 8px; border: none; color: #fff; font-weight: 700; cursor: pointer; overflow: hidden; text-decoration: none; }
+.mark-done { background: linear-gradient(135deg, var(--apricot), var(--rose)); font-size: 13px; padding: 9px 18px; border-radius: 20px; margin-top: 4px; box-shadow: 0 4px 14px rgba(201,123,134,.35); }
+.mark-done.active { background: linear-gradient(135deg, var(--sage-deep), var(--sage)); box-shadow: 0 4px 14px rgba(94,117,104,.3); }
+.submit-btn { background: linear-gradient(135deg, var(--gold), var(--rose)); font-size: 14px; padding: 12px 26px; border-radius: 24px; box-shadow: 0 6px 18px rgba(156,115,40,.3); }
+.submit-btn:disabled { opacity: .6; cursor: default; }
+.mark-done::after, .submit-btn::after { content: ''; position: absolute; top: 0; left: -60%; width: 40%; height: 100%; background: linear-gradient(120deg, transparent, rgba(255,255,255,.55), transparent); transform: skewX(-20deg); }
+.submit-note { font-size: 12px; color: var(--ink-soft); margin-top: 8px; }
+.submit-confirm { font-size: 14px; font-weight: 700; color: var(--sage-deep); margin-top: 16px; display: none; }
+.footer-note { text-align: center; font-size: 13px; color: var(--ink-soft); margin-top: 40px; }
+.nav-row { display: flex; justify-content: space-between; margin-top: 32px; }
+.nav-btn { background: var(--card); color: var(--ink); border: 0.5px solid var(--line); padding: 10px 20px; border-radius: 20px; font-size: 13px; }
+.nav-btn.primary { background: linear-gradient(135deg, var(--apricot), var(--rose)); color: #fff; }
+.greeting { font-size: 14px; color: var(--ink-soft); margin: 0 0 4px; }
+.greeting .user-name-slot { font-weight: 700; color: var(--rose-deep); }
+.avatar .user-initial-slot { width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:#fff; font-family:'Fraunces',serif; font-size:22px; }
+.name-modal-overlay { position: fixed; inset: 0; background: rgba(58,47,48,.45); display: none; align-items: center; justify-content: center; z-index: 999; padding: 20px; }
+.name-modal-box { background: var(--card); border-radius: 18px; padding: 32px 28px; max-width: 340px; width: 100%; text-align: center; box-shadow: 0 12px 40px rgba(58,47,48,.25); }
+.name-modal-title { font-family: 'Fraunces', serif; font-size: 20px; margin: 0 0 6px; color: var(--ink); }
+.name-modal-sub { font-size: 14px; color: var(--ink-soft); margin: 0 0 18px; }
+.name-modal-box input { width: 100%; border: 0.5px solid var(--line); border-radius: 10px; padding: 10px 14px; font-family: 'Lato', sans-serif; font-size: 15px; margin-bottom: 14px; text-align: center; }
+.name-modal-box input:focus { outline: none; border-color: var(--rose); }
+.name-modal-box .submit-btn { width: 100%; justify-content: center; padding: 12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand-row">
+  <div class="brand-left">
+    <video autoplay loop muted playsinline><source src="mumty-logo-animation.mp4" type="video/mp4"></video>
+    <span class="brand-name">Mumty</span>
+  </div>
+  <div style="display:flex; gap:8px;">
+    <a class="back-link" href="https://zugang-mumty-businessaufbau.netlify.app/">🏠 Start</a>
+    <a class="back-link" href="index.html">← Übersicht</a>
+  </div>
+</div>
+  <div class="name-modal-overlay" id="name-modal">
+  <div class="name-modal-box">
+    <p class="name-modal-title">Schön, dass du da bist!</p>
+    <p class="name-modal-sub">Wie dürfen wir dich nennen?</p>
+    <input id="name-input" type="text" placeholder="Dein Vorname" maxlength="20" onkeydown="if(event.key==='Enter')submitName()">
+    <button class="submit-btn" onclick="submitName()">Los geht's</button>
+  </div>
+</div>
+  <div class="hero">
+    <div class="avatar"><span class="user-initial-slot">?</span></div>
+    <div>
+      <p class="greeting">Hallo <span class="user-name-slot">du</span> 👋</p>
+      <p class="eyebrow">Modul 18.2</p>
+      <h1>Content-Vorlauf</h1>
+    </div>
+  </div>
+
+  <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+  <div class="progress-label" id="progress-label"></div>
+
+  <div class="card">
+    
+<p>In den 1-2 Wochen vor der eigentlichen Launch-Woche baust du gezielt Content, der zu deinem Angebot hinführt — ohne schon zu verkaufen.</p>
+<div class="example"><strong>Der Aufbau des Content-Vorlaufs:</strong><br>
+Woche 1: Problem & Sehnsucht — Content, der genau die Herausforderung deiner Zielgruppe zeigt, ohne schon die Lösung zu verraten<br>
+Woche 2: Der neue Weg — du zeigst, dass es einen anderen Ansatz gibt als das, was bisher nicht funktioniert hat<br>
+Kurz vor Launch: die Einladung zum Webinar/Live-Event, wo das Angebot vorgestellt wird</div>
+<p>Nutze deinen Redaktionskalender (siehe KI-Tools-Modul), um diesen Content-Vorlauf gezielt zu planen — jeder Post baut auf dem vorherigen auf, statt lose nebeneinander zu stehen.</p>
+<div class="example"><strong>Wichtig:</strong> Content in dieser Phase soll Vertrauen und Neugier aufbauen, nicht schon den Preis oder Kauf-Button zeigen. Das kommt erst in der Launch-Woche.</div>
+<div class="reflect"><span class="reflect-q">Welches Problem deiner Zielgruppe zeigst du in Woche 1 deines nächsten Content-Vorlaufs?</span>
+<textarea data-key="q2" placeholder="Deine Antwort..."></textarea></div>
+
+  </div>
+
+  <div class="nav-row"><a class="nav-btn" href="modul-18-1.html">← Vorbereitung & Warteliste</a><a class="nav-btn primary" href="modul-18-3.html">Die Launch-Woche →</a></div>
+  <p class="footer-note">Launch · Teil des MUMTY Business-Aufbauprogramms</p>
+</div>
+<script>
+
+function toggleLesson(el) { el.classList.toggle('open'); }
+function saveState(storeKey) {
+  const data = {};
+  document.querySelectorAll('textarea').forEach(t => data[t.dataset.key] = t.value);
+  document.querySelectorAll('.checklist input[type=checkbox]').forEach(c => data[c.dataset.check] = c.checked);
+  document.querySelectorAll('.mark-done').forEach((b,i) => data['done_'+i] = b.classList.contains('active'));
+  try { localStorage.setItem(storeKey, JSON.stringify(data)); } catch(e) {}
+}
+function loadState(storeKey) {
+  try {
+    const raw = localStorage.getItem(storeKey);
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    document.querySelectorAll('textarea').forEach(t => { if (data[t.dataset.key]) t.value = data[t.dataset.key]; });
+    document.querySelectorAll('.checklist input[type=checkbox]').forEach(c => { if (data[c.dataset.check]) c.checked = true; });
+    document.querySelectorAll('.mark-done').forEach((b,i) => { if (data['done_'+i]) b.click(); });
+  } catch(e) {}
+}
+function toggleDone(btn, idx) {
+  btn.classList.toggle('active');
+  btn.textContent = btn.classList.contains('active') ? 'Abgeschlossen' : 'Lektion abgeschlossen';
+}
+function updateProgress() {
+  const t = document.querySelectorAll('textarea');
+  let filled = 0; t.forEach(x => { if (x.value.trim().length>0) filled++; });
+  const pct = t.length ? Math.round(filled/t.length*100) : 100;
+  const f = document.getElementById('progress-fill'); if (f) f.style.width = pct + '%';
+  const l = document.getElementById('progress-label'); if (l) l.textContent = filled + ' von ' + t.length + ' Reflexionen beantwortet';
+}
+function encodeFormData(data) {
+  return Object.keys(data).map(k => encodeURIComponent(k) + '=' + encodeURIComponent(data[k])).join('&');
+}
+function collectAllModuleData() {
+  const keys = ['la_modul18','la_modul18_1','la_modul18_2','la_modul18_3','la_modul18_4','la_modul19','la_modul19_1','la_modul20','la_modul21','la_modul21_1','la_modul22','la_modul23','la_modul23_1','la_modul24','la_modul24_1','la_modul25','la_modul25_1','la_modul26','la_modul26_1'];
+  const merged = {};
+  keys.forEach(k => {
+    try {
+      const raw = localStorage.getItem(k);
+      if (!raw) return;
+      const data = JSON.parse(raw);
+      Object.keys(data).forEach(field => {
+        if (field.indexOf('done_') === 0) return;
+        merged[field] = data[field];
+      });
+    } catch(e) {}
+  });
+  return merged;
+}
+function submitAllAnswers() {
+  let id = localStorage.getItem('alphamum_session_id');
+  if (!id) { id = 'anon-' + Math.random().toString(36).slice(2) + Date.now(); localStorage.setItem('alphamum_session_id', id); }
+  const merged = collectAllModuleData();
+  const data = Object.assign({ 'form-name': 'launch-gesamt', modul: 'Launch - Gesamt', session_id: id }, merged);
+  fetch('/', { method: 'POST', headers: {'Content-Type':'application/x-www-form-urlencoded'}, body: encodeFormData(data) })
+    .then(() => {
+      document.getElementById('submit-button').disabled = true;
+      document.getElementById('submit-button').textContent = 'Eingesendet';
+      document.getElementById('submit-confirm').style.display = 'block';
+    }).catch(() => {
+      const c = document.getElementById('submit-confirm');
+      c.textContent = 'Senden hat nicht geklappt — versuch es gleich nochmal.';
+      c.style.color = 'var(--rose-deep)'; c.style.display = 'block';
+    });
+}
+
+
+function getUserName() {
+  const params = new URLSearchParams(window.location.search);
+  const urlName = params.get('n');
+  if (urlName) { try { localStorage.setItem('alphamum_name', urlName); } catch(e) {} return urlName; }
+  return localStorage.getItem('alphamum_name');
+}
+function applyName(name) {
+  document.querySelectorAll('.user-name-slot').forEach(el => el.textContent = name);
+  document.querySelectorAll('.user-initial-slot').forEach(el => el.textContent = name.charAt(0).toUpperCase());
+}
+function submitName() {
+  const val = document.getElementById('name-input').value.trim();
+  if (!val) return;
+  localStorage.setItem('alphamum_name', val);
+  document.getElementById('name-modal').style.display = 'none';
+  applyName(val);
+}
+function initNameGate() {
+  const name = getUserName();
+  if (name) { applyName(name); return; }
+  document.getElementById('name-modal').style.display = 'flex';
+}
+initNameGate();
+
+document.querySelectorAll('textarea').forEach(t => t.addEventListener('input', () => { saveState('la_modul18_2'); updateProgress(); }));
+document.querySelectorAll('.checklist input[type=checkbox]').forEach(c => c.addEventListener('change', () => saveState('la_modul18_2')));
+loadState('la_modul18_2');
+updateProgress();
+try { localStorage.setItem('la_last_lesson', window.location.pathname.split('/').pop() || 'index.html'); } catch(e) {}
+</script>
+</body>
+</html>
